@@ -18,6 +18,9 @@ const config = {
 		  prerender: {
 			  entries: ['*'],
 		  },
+		  paths: {
+            base: '',  // Leave this empty for root deployment
+        },
 	}
 };
 
