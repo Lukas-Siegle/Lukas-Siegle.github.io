@@ -12,7 +12,7 @@
 <ModeWatcher />
 <Header />
 <!-- <GraphBackground /> -->
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto xl:px-24  py-8">
 	<slot />
 </div>
 
