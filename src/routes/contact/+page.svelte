@@ -40,7 +40,7 @@
 						<p class="text-muted-foreground"><a  href="https://www.linkedin.com/in/lukas-siegle-57628b290/" >Message me</a></p>
 				</Card>
 			</div>
-			<Card class="bg-card p-6 text-card-foreground">
+			<!-- <Card class="bg-card p-6 text-card-foreground">
 				<form on:submit|preventDefault={handleSubmit} class="space-y-6">
 					<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 						<div class="space-y-2">
@@ -88,7 +88,7 @@
 
 					<Button type="submit" class="w-full">Send Message</Button>
 				</form>
-			</Card>
+			</Card> -->
 		</div>
 	</main>
 </div>
