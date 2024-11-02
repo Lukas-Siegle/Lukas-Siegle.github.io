@@ -4,8 +4,6 @@
 	import Header from '$lib/components/ui/nav/Header.svelte';
 	import Sun from 'lucide-svelte/icons/sun';
 	import Moon from 'lucide-svelte/icons/moon';
-	import GraphBackground from '$lib/components/ui/background/GraphBackground.svelte';
-
 	import { toggleMode } from 'mode-watcher';
 	import { Button } from '$lib/components/ui/button/index.js';
 
