@@ -107,6 +107,21 @@
 			page: 'https://fluentbit.io/',
 			img: 'fluentbit.webp',
 		},
+        {
+			name: 'Nmap',
+			page: 'https://nmap.org/',
+			img: 'nmap.png',
+		},
+        {
+			name: 'SQLMap',
+			page: 'https://sqlmap.org/',
+			img: 'sqlmap.png',
+		},
+        {
+			name: 'Zap',
+			page: 'https://www.zaproxy.org/',
+			img: 'zap.png',
+		},
 	];
 </script>
 
