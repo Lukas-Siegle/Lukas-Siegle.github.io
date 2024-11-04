@@ -73,22 +73,22 @@
 					<span>{profile.location}</span>
 				</div>
 				<div class="flex items-center justify-center p-4">
-					<span class="font-medium">Age:</span>
-					<div class="ml-4 font-mono">
-					  <div class="grid grid-cols-[auto_auto_auto_auto] gap-x-4">
-						<span>Years:</span>
+					<span class="font-bold -rotate-90">Age</span>
+					<div class="font-mono">
+					  <div class="grid grid-cols-[auto_auto_auto_auto] gap-x-4 border-l border-gray-200 pl-2">
+						<span class="text-left">Years:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.years}</span>
-						<span>Months:</span>
+						<span class="text-left">Months:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.months}</span>
 						
-						<span>Days:</span>
+						<span class="text-left">Days:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.days}</span>
-						<span>Hours:</span>
+						<span class="text-left">Hours:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.hours}</span>
 						
-						<span>Minutes:</span>
+						<span class="text-left">Minutes:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.minutes}</span>
-						<span>Seconds:</span>
+						<span class="text-left">Seconds:</span>
 						<span class="inline-block min-w-[3ch] text-right">{age.seconds}</span>
 					  </div>
 					</div>
