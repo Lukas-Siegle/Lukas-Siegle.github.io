@@ -60,3 +60,45 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export function ExactBirthdate(date: Date): { years: number, months: number, days: number, hours: number, minutes: number, seconds: number } {
+	const now = new Date();
+
+	let years = now.getFullYear() - date.getFullYear();
+	let months = now.getMonth() - date.getMonth();
+	let days = now.getDate() - date.getDate();
+	let hours = now.getHours() - date.getHours();
+	let minutes = now.getMinutes() - date.getMinutes();
+	let seconds = now.getSeconds() - date.getSeconds();
+	if (seconds < 0) {
+		minutes -= 1;
+		seconds += 60;
+	}
+	if (minutes < 0) {
+		hours -= 1;
+		minutes += 60;
+	}
+	if (hours < 0) {
+		days -= 1;
+		hours += 24;
+	}
+	if (days < 0) {
+		months -= 1;
+		const previousMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+		days += previousMonth.getDate();
+	}
+	if (months < 0) {
+		years -= 1;
+		months += 12;
+	}
+	const exact_birthdate = {
+		years: years,
+		months: months,
+		days: days,
+		hours: hours,
+		minutes: minutes,
+		seconds: seconds,
+	}
+	return exact_birthdate
+
+}

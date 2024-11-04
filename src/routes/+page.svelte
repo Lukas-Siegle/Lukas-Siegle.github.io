@@ -2,8 +2,10 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Avatar from '$lib/components/ui/avatar';
 	import { Button } from '$lib/components/ui/button';
-	import { Github, Linkedin, MailIcon } from 'lucide-svelte';
+	import { Github, Linkedin, MailIcon, MapPin, Cake } from 'lucide-svelte';
 	import Header from '$lib/components/ui/nav/Header.svelte';
+	import { onMount } from 'svelte';
+	import { ExactBirthdate } from '$lib/utils';
 
 	const education = [
 		{
@@ -24,6 +26,34 @@
 		{ name: 'Sys Admin', from: 'May 2023', to: 'November 2024', where: 'bitExpert' },
 		{ name: 'Cyber Security Analyst', from: 'December 2023', to: 'Now', where: 'Bilfinger' }
 	];
+	let age = $state({
+		years: 0,
+		months: 0,
+		days: 0,
+		hours: 0,
+		minutes: 0,
+		seconds: 0
+	});
+	const profile = {
+		name: 'Lukas Siegle',
+		occupation: 'Cyber Security Student',
+		location: 'Mannheim, Germany',
+		birthday: new Date(2003, 7, 7, 13, 37, 0),
+
+		github: 'https://github.com/Lukas-Siegle',
+		linkedin: 'https://www.linkedin.com/in/lukas-siegle-57628b290/',
+		about: `My name is Lukas Siegle, and I am currently pursuing a Bachelor's degree in Cyber Security
+					at Hochschule Mannheim, where I am in my 7th semester.`,
+		interests: `In addition to my studies in Computer Science with a focus on Cyber Security, I enjoy
+					various sports, including Muay Thai, powerlifting, and bodybuilding. I also love traveling
+					and enjoying nature.`
+	};
+	onMount(() => {
+		age = ExactBirthdate(profile.birthday);
+		setInterval(() => {
+			age = ExactBirthdate(profile.birthday);
+		}, 1000);
+	});
 </script>
 
 <div class="flex flex-col gap-4 md:flex-row">
@@ -31,21 +61,46 @@
 		<Card.Header>
 			<Avatar.Root class="mx-auto h-32 w-32">
 				<Avatar.Image src="/profile.jpeg" alt="Profile picture" />
-				<Avatar.Fallback>JD</Avatar.Fallback>
+				<Avatar.Fallback>LS</Avatar.Fallback>
 			</Avatar.Root>
 		</Card.Header>
 		<Card.Content class="text-center">
-			<h2 class="mb-2 text-xl font-semibold">Lukas Siegle</h2>
-			<p class="-foreground mb-4">Cyber Security Student</p>
-			<p class="mb-2">Age: 21</p>
-			<p class="mb-4">Location: Mannheim, Germany</p>
-			<div class="flex justify-center space-x-2">
-				<a href="https://github.com/Lukas-Siegle">
+			<h2 class="mb-2 text-xl font-semibold">{profile.name}</h2>
+			<div class="mb-4 space-y-2">
+				<p class="text-muted-foreground">{profile.occupation}</p>
+				<div class="flex items-center justify-center gap-2">
+					<MapPin class="h-4 w-4" />
+					<span>{profile.location}</span>
+				</div>
+				<div class="flex items-center justify-center p-4">
+					<span class="font-medium">Age:</span>
+					<div class="ml-4 font-mono">
+					  <div class="grid grid-cols-[auto_auto_auto_auto] gap-x-4">
+						<span>Years:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.years}</span>
+						<span>Months:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.months}</span>
+						
+						<span>Days:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.days}</span>
+						<span>Hours:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.hours}</span>
+						
+						<span>Minutes:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.minutes}</span>
+						<span>Seconds:</span>
+						<span class="inline-block min-w-[3ch] text-right">{age.seconds}</span>
+					  </div>
+					</div>
+				  </div>
+			</div>
+			<div class="flex justify-center gap-2">
+				<a href={profile.github}>
 					<Button variant="outline" size="icon">
 						<Github class="h-4 w-4" />
 					</Button>
 				</a>
-				<a href="https://www.linkedin.com/in/lukas-siegle-57628b290/">
+				<a href={profile.linkedin}>
 					<Button variant="outline" size="icon">
 						<Linkedin class="h-4 w-4" />
 					</Button>
@@ -65,8 +120,7 @@
 			</Card.Header>
 			<Card.Content>
 				<p>
-					My name is Lukas Siegle, and I am currently pursuing a Bachelor's degree in Cyber Security
-					at Hochschule Mannheim, where I am in my 7th semester.
+					{profile.about}
 				</p>
 			</Card.Content>
 		</Card.Root>
@@ -76,9 +130,7 @@
 			</Card.Header>
 			<Card.Content>
 				<p>
-					In addition to my studies in Computer Science with a focus on Cyber Security, I enjoy
-					various sports, including Muay Thai, powerlifting, and bodybuilding. I also love traveling
-					and enjoying nature.
+					{profile.interests}
 				</p>
 			</Card.Content>
 		</Card.Root>
