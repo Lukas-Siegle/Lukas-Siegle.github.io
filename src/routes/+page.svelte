@@ -38,7 +38,8 @@
 		name: 'Lukas Siegle',
 		occupation: 'Cyber Security Student',
 		location: 'Mannheim, Germany',
-		birthday: new Date(2003, 7, 7, 13, 37, 0),
+		// Months go from 0 - 11
+		birthday: new Date(2003, 6, 7, 13, 37, 0), 
 
 		github: 'https://github.com/Lukas-Siegle',
 		linkedin: 'https://www.linkedin.com/in/lukas-siegle-57628b290/',
