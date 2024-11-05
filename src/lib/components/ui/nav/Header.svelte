@@ -2,12 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { cn } from '$lib/utils';
-	import { Home, User, Cpu, MailQuestion } from 'lucide-svelte';
+	import { Home, User, Cpu, MailQuestion, Scroll } from 'lucide-svelte';
 
 	const navItems = [
 		{ href: '/', icon: User, label: 'Home' },
 		{ href: '/contact', icon: MailQuestion, label: 'Contact' },
-		{ href: '/technologies', icon: Cpu, label: 'Technologies' }
+		{ href: '/technologies', icon: Cpu, label: 'Technologies' },
+		{ href: '/blog', icon: Scroll, label: 'Blog'}
 	];
 </script>
 
