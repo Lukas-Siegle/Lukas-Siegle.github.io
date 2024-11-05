@@ -61,7 +61,7 @@
 	<Card.Root class="w-full shadow-lg md:w-1/3">
 		<Card.Header>
 			<Avatar.Root class="mx-auto h-32 w-32">
-				<Avatar.Image src="/profile.jpeg" alt="Profile picture" />
+				<!-- <Avatar.Image src="/profile.jpeg" alt="Profile picture" /> -->
 				<Avatar.Fallback>LS</Avatar.Fallback>
 			</Avatar.Root>
 		</Card.Header>
