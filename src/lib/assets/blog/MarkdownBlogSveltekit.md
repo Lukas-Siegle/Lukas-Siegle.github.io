@@ -1,7 +1,7 @@
 ---
 title: Creating a Markdown Blog with Sveltekit
 date: '2024-11-05'
-description: 'This is my first blog post about creating a blog with Sveltekit'
+description: 'A step-by-step guide to building a blog with SvelteKit and Markdown'
 author: 'Lukas Siegle'
 tags: ['Sveltekit', 'Markdown']
 ---
@@ -16,7 +16,6 @@ npm install gray-matter marked
 npm install @types/node -D
 
 ```
-
 You must also add `assetsInclude: ['**/*.md']` to your `vite.config.ts`, which should look something like this:
 
 ```typescript
@@ -40,7 +39,7 @@ Set up the required directory structure as follows:
 
 Your project structure should look like this:
 
-```
+```markdown
 src
 ├── lib
 │   ├── assets
@@ -59,7 +58,7 @@ src
 
 Within each Markdown file, you can include metadata that we will utilize later on.
 
-```blog1.md
+```markdown
 ---
 title: Creating a Markdown Blog with Sveltekit
 date: '2024-11-05'
@@ -150,21 +149,20 @@ The key points are:
 
 ---
 
-To pass data to your pages, we load it in `+page.server.ts`:
+In SvelteKit, you can pass data to pages by creating a load function inside `+page.server.ts`. This server-side function fetches the data and passes it to the page for rendering. For our blog, we can load all posts when the root route (`/`) opens (this is your `routes/+page.svelte` file) by calling the function from `blog.ts` and returning the data like this:
 
 ```typescript
 // src/routes/+page.server.ts
-import { LoadBlogPosts } from '$lib/server/blog';
+import { LoadBlogPosts } from '$lib/server/blog';. 
 
 export async function load() {
     const posts = await LoadBlogPosts();
     return { posts };
 }
 ```
+After that, we can access the returned data inside our `+page.svelte` and display it:
 
-In `+page.svelte`, access the data and display it:
-
-```svelte
+```typescript
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
     let { data } = $props();
@@ -186,9 +184,7 @@ In `+page.svelte`, access the data and display it:
 </div>
 ```
 
-This loads the blog posts on the server side and renders them on the page.
-
-**Note**: The `data` object contains all the information returned by the `LoadBlogPosts` function from `blog.ts`. 
+**Note**: The `data` object contains all the values returned by the `LoadBlogPosts` function from `blog.ts`. 
 
 ---
 
@@ -209,7 +205,7 @@ export async function load({ params }) {
 
 In `[slug]/+page.svelte`, retrieve your data with `props` and render the content using `marked`:
 
-```svelte
+```typescript
 <!-- src/routes/[slug]/+page.svelte -->
 <script lang="ts">
     import { marked } from "marked";
@@ -226,9 +222,6 @@ In `[slug]/+page.svelte`, retrieve your data with `props` and render the content
 
 ```
 
-
-This setup allows you to dynamically view each blog post by parsing and displaying its content. The `data` object contains everything returned by `LoadBlogPost`.
-
 ---
 
-Now, all that's left is to add some styling and error handling, and you’re all set! For reference, you can find the code and some basic styling of the entire code for this blog [here](https://github.com/Lukas-Siegle/Example-Markdown-Blog). Additionally, you can view the code for the blog you’re currently reading [here]().
+Now, all that's left is to add some styling and error handling, and you’re all set! For reference, you can find the code and some basic styling of the entire code [here](https://github.com/Lukas-Siegle/Example-Markdown-Blog). Additionally, you can view the code for the blog you’re currently reading [here](https://github.com/Lukas-Siegle/Personal-Website).
