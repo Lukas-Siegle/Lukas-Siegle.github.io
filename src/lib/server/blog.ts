@@ -15,13 +15,12 @@ function parseMarkdown(file: any) {
   };
 }
 
-// Lädt alle Blogposts und extrahiert die Metadaten
 export async function LoadBlogPosts() {
   const posts = Object.keys(modules).map((filePath) => {
     const file = modules[filePath];
     const parsed = parseMarkdown(file);
     return {
-      slug: filePath.split('/').pop()?.replace('.md', ''), // Slug aus dem Dateinamen
+      slug: filePath.split('/').pop()?.replace('.md', ''),
       ...parsed,
     };
   });
@@ -39,13 +38,6 @@ export async function LoadBlogPost(slug: string) {
     throw new Error("Blogpost nicht gefunden");
   }
 
-  const { title, author, description, date, content } = parseMarkdown(file);
-
-  return {
-    title,
-    author,
-    description,
-    date,
-    content,
-  };
+  const parsed = parseMarkdown(file);
+  return parsed;
 }
