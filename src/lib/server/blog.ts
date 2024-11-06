@@ -4,7 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 
 export async function LoadBlogPosts() {
-  const postsDirectory = path.resolve('static/blog');
+  const postsDirectory = path.resolve('src/lib/assets/blog');
   const filenames = fs.readdirSync(postsDirectory);
 
   const posts = await Promise.all(
@@ -28,7 +28,13 @@ export async function LoadBlogPosts() {
 }
 
 export async function LoadBlogPost(slug: string) {
-  const filePath = path.resolve(`static/blog/${slug}.md`);
+  const basePath = path.resolve('src/lib/assets/blog');
+  const filePath = path.resolve(basePath, `${slug}.md`);
+
+  if (!filePath.startsWith(basePath)) {
+    throw new Error("Invalid file path");
+  }
+
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 
