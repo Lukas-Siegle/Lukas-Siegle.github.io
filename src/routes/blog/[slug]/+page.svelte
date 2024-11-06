@@ -1,9 +1,51 @@
 <script lang="ts">
 	import Button from '$lib/components/ui/button/button.svelte';
+	import CopyButton from '$lib/components/ui/copy-button/button.svelte';
 	import { ArrowLeft } from 'lucide-svelte';
-	import { marked } from 'marked';
 	import { Separator } from '$lib/components/ui/separator';
+	import { Marked } from 'marked';
+	import { markedHighlight } from 'marked-highlight';
+	import { onMount } from 'svelte';
+	import hljs from 'highlight.js';
+	import { mount } from 'svelte';
+	import 'highlight.js/styles/atom-one-dark.css';
+
+	import 'highlight.js/lib/languages/typescript';
+	import 'highlight.js/lib/languages/bash';
+	import 'highlight.js/lib/languages/markdown';
+
 	let { data } = $props();
+
+	const marked = new Marked(
+		markedHighlight({
+			langPrefix: 'hljs language-',
+			highlight(code, lang) {
+				const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+				return hljs.highlight(code, { language }).value;
+			}
+		})
+	);
+
+	function renderMarkdown(content: string) {
+		return marked.parse(content);
+	}
+	onMount(() => {
+    for (const node of document.querySelectorAll('pre > code')) {
+        const pre = node.parentElement;
+        if (!pre || pre.querySelector('button')) continue;
+
+        // Add positioning class to pre if not already present
+        pre.classList.add('relative');
+
+        mount(CopyButton, {
+            target: pre,
+            props: {
+                content: node.textContent ?? '',
+                style: 'absolute top-2 right-2 z-10'
+            }
+        });
+    }
+});
 </script>
 
 <div class="container mx-auto px-4 py-12 lg:px-0">
@@ -24,8 +66,8 @@
 			<p class="text-lg text-muted-foreground">{data.description}</p>
 		</div>
 		<Separator />
-		<div class="prose prose-lg prose-slate markdown mt-8 max-w-none font-sans">
-			{@html marked(data.content)}
+		<div class="prose prose-lg prose-slate markdown dark:prose-dark mt-8 max-w-none font-sans">
+			{@html renderMarkdown(data.content)}
 		</div>
 	</div>
 </div>
@@ -62,21 +104,29 @@
 	}
 
 	:global(.markdown pre) {
-		background-color: hsl(var(--secondary));
+		background-color: hsl(12 6.5% 15.1%);
 		border: 1px solid hsl(var(--border));
 		border-radius: 0.5rem;
 		padding: 1.25rem;
 		margin: 1.5rem 0;
 		overflow-x: auto;
+	}
+
+	:global(.markdown pre code) {
 		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 		font-size: 0.875rem;
 		line-height: 1.5;
+		background-color: transparent;
+		padding: 0;
+		border-radius: 0;
 	}
 
 	:global(.markdown code) {
 		background-color: hsl(var(--secondary));
-		padding: 2px;
-		border-radius: 0.5rem;
+		padding: 2px 4px;
+		border-radius: 0.25rem;
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		font-size: 0.875em;
 	}
 
 	:global(.markdown li) {
