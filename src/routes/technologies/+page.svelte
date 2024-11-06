@@ -3,6 +3,21 @@
 	import { Separator } from '$lib/components/ui/separator/index.js';
 	import type { Technology } from '$lib/types';
 
+	const images: any = import.meta.glob('$lib/assets/images/*.{png,jpg,jpeg,svg,webp}', {
+		eager: true,
+		// query: {
+		// 	enhanced: true
+		// }
+	});
+
+	function getImageUrl(path: string) {
+		const key = Object.keys(images).find((key) => key.includes(path));
+		return key ? images[key].default : '';
+	}
+	// function getImageModule(path: string) {
+	// 	const key = Object.keys(images).find((key) => key.includes(path));
+	// 	return key ? images[key].default : null;
+	// }
 	const technologies_current: Technology[] = [
 		{
 			name: 'Typescript',
@@ -146,11 +161,8 @@
 					<div
 						class="mb-2 flex w-[95%] items-center space-x-4 rounded-lg bg-card p-3 transition-colors hover:bg-accent"
 					>
-						<img
-							class="h-12 w-12 rounded-md object-contain"
-							src="technologies/{technology.img}"
-							alt="{technology.name} logo"
-						/>
+						<img src={getImageUrl(technology.img)} alt={technology.name} class="h-8 w-8" />
+
 						<a href={technology.page} class="text-md font-medium hover:underline"
 							>{technology.name}</a
 						>
@@ -160,6 +172,7 @@
 			{/each}
 		</div>
 	</div>
+
 	<div class="p-6">
 		<h4 class="mb-6 text-xl font-semibold">
 			Tools and Technologies I've Used or Occasionally Utilize
@@ -171,11 +184,8 @@
 					<div
 						class="mb-2 flex w-[95%] items-center space-x-4 rounded-lg bg-card p-3 transition-colors hover:bg-accent"
 					>
-						<img
-							class="h-12 w-12 rounded-md object-contain"
-							src="technologies/{technology.img}"
-							alt="{technology.name} logo"
-						/>
+						<img src={getImageUrl(technology.img)} alt={technology.name} class="h-8 w-8" />
+
 						<a href={technology.page} class="text-md font-medium hover:underline"
 							>{technology.name}</a
 						>
