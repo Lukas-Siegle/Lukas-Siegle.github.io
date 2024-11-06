@@ -21,8 +21,11 @@
 		<div class="mx-auto max-w-2xl space-y-8">
 			<div class="space-y-4 text-center">
 				<h1 class="text-4xl font-bold tracking-tight text-foreground">Contact Me</h1>
+				<p class="text-xl text-muted-foreground">
+					Got questions?
+				</p>
 				<p class="text-lg text-muted-foreground">
-					Got questions? Send me a message, and I’ll get back to you as soon as possible.
+					 Send me a message, and I’ll get back to you as soon as possible.
 				</p>
 			</div>
 
