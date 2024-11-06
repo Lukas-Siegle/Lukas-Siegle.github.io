@@ -8,7 +8,7 @@
 		{ href: '/', icon: User, label: 'Home' },
 		{ href: '/contact', icon: MailQuestion, label: 'Contact' },
 		{ href: '/technologies', icon: Cpu, label: 'Technologies' },
-		{ href: '/blog', icon: Scroll, label: 'Blog'}
+		{ href: '/blog', icon: Scroll, label: 'Blog' }
 	];
 </script>
 
@@ -37,7 +37,10 @@
 							'xl:h-12 xl:w-12',
 							'hover:bg-primary hover:text-primary-foreground',
 							'focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background',
-							$page.url.pathname === item.href
+							$page.url.pathname === item.href || (
+								($page.url.pathname.startsWith(item.href) && item.href !== '/') || 
+								($page.url.pathname === '/' && item.href === '/')
+							)
 								? 'bg-primary text-primary-foreground'
 								: 'bg-secondary text-secondary-foreground'
 						)}
