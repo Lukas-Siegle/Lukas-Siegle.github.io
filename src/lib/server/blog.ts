@@ -1,48 +1,51 @@
-// src/lib/server/blog.ts
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 
+const modules: any = import.meta.glob('/src/lib/assets/blog/*.md', { eager: true, query: '?raw', import: 'default'
+ });
+
+function parseMarkdown(file: any) {
+  const { data, content } = matter(file);
+  return {
+    title: data.title,
+    date: data.date,
+    description: data.description,
+    author: data.author,
+    tags: data.tags,
+    content,
+  };
+}
+
+// Lädt alle Blogposts und extrahiert die Metadaten
 export async function LoadBlogPosts() {
-  const postsDirectory = path.resolve('src/lib/assets/blog');
-  const filenames = fs.readdirSync(postsDirectory);
+  const posts = Object.keys(modules).map((filePath) => {
+    const file = modules[filePath];
+    const parsed = parseMarkdown(file);
+    return {
+      slug: filePath.split('/').pop()?.replace('.md', ''), // Slug aus dem Dateinamen
+      ...parsed,
+    };
+  });
 
-  const posts = await Promise.all(
-    filenames.map(async (filename) => {
-      const filePath = path.join(postsDirectory, filename);
-      const fileContents = fs.readFileSync(filePath, 'utf8');
-      const { data } = matter(fileContents);
-
-      return {
-        slug: filename.replace('.md', ''),
-        title: data.title,
-        date: data.date,
-        description: data.description,
-        author: data.author,
-        tags: data.tags,
-      };
-    })
-  );
+  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return { posts };
 }
 
 export async function LoadBlogPost(slug: string) {
-  const basePath = path.resolve('src/lib/assets/blog');
-  const filePath = path.resolve(basePath, `${slug}.md`);
+  const filePath = `/src/lib/assets/blog/${slug}.md`;
+  const file = modules[filePath];
 
-  if (!filePath.startsWith(basePath)) {
-    throw new Error("Invalid file path");
+  if (!file) {
+    throw new Error("Blogpost nicht gefunden");
   }
 
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const { data, content } = matter(fileContents);
+  const { title, author, description, date, content } = parseMarkdown(file);
 
   return {
-    title: data.title,
-    author: data.author,
-    description: data.description,
-    date: data.date,
+    title,
+    author,
+    description,
+    date,
     content,
   };
 }
