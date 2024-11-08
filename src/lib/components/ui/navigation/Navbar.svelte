@@ -6,9 +6,9 @@
 
 	const navItems = [
 		{ href: '/', icon: User, label: 'Home' },
-		{ href: '/contact', icon: MailQuestion, label: 'Contact' },
+		{ href: '/blog', icon: Scroll, label: 'Blog' },
 		{ href: '/technologies', icon: Cpu, label: 'Technologies' },
-		{ href: '/blog', icon: Scroll, label: 'Blog' }
+		{ href: '/contact', icon: MailQuestion, label: 'Contact' },
 	];
 </script>
 
