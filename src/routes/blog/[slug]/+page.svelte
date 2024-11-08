@@ -67,7 +67,9 @@
 		</div>
 		<Separator />
 		<div class="prose prose-lg prose-slate markdown dark:prose-dark mt-8 max-w-none font-sans">
-			{@html renderMarkdown(data.content)}
+			{#if data.content}
+				{@html renderMarkdown(data.content)}
+			{/if}
 		</div>
 	</div>
 </div>
@@ -155,5 +157,13 @@
 		color: hsl(var(--primary));
 		text-decoration-color: hsl(var(--primary-light));
 		text-decoration-thickness: 2px;
+	}
+
+	:global(.markdown img) {
+		border-radius: 5px;
+		border: solid 1px black;
+		margin: 15px auto;
+		width: 90%;
+
 	}
 </style>

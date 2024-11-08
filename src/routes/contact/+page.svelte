@@ -33,7 +33,7 @@
 				<Card class="bg-card p-6 text-card-foreground">
 					<div class="space-y-2">
 						<h3 class="text-lg font-semibold">Email</h3>
-						<p class="text-muted-foreground">sieglelukas1@gmail.com</p>
+						<p class="text-muted-foreground">lukas@siegle.app</p>
 					</div>
 				</Card>
 				<Card class="bg-card p-6 text-card-foreground">
