@@ -27,12 +27,11 @@ export const profile = {
     occupation: 'Cyber Security Student',
     location: 'Mannheim, Germany',
     // Months go from 0 - 11
-    birthday: new Date(2003, 6, 7, 13, 37, 0), 
+    birthday: new Date(2003, 6, 7, 13, 37, 0),
 
     github: 'https://github.com/Lukas-Siegle',
     linkedin: 'https://www.linkedin.com/in/lukas-siegle-57628b290/',
-    about: `My name is Lukas Siegle, and I am currently pursuing a Bachelor's degree in Cyber Security
-                at Hochschule Mannheim, where I am in my 7th semester.`,
+    about: `My name is Lukas Siegle, and I am currently pursuing a Bachelor's degree in Cybersecurity at the Technical University of Mannheim, where I am in my 7th semester.`,
     interests: `In addition to my studies in Computer Science with a focus on Cyber Security, I enjoy
                 various sports, including Muay Thai, powerlifting, and bodybuilding. I also love traveling
                 and enjoying nature.`
